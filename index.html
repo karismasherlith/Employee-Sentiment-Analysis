@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8fafc;
+        }
+        .container {
+            background: #d9eafd;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 700px;
+            height: 350px;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            text-align: center;
+            color: #9aa6b2;
+        }
+        .form-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+        .form-group input[type="text"] {
+            width: 90%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #f8fafc;
+            border-radius: 4px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        .form-group input[type="submit"],
+        .form-group input[type="reset"] {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            width: 45%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"] {
+            background-color: #bcccdc;
+            color: #333;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .form-group input[type="reset"] {
+            background-color: #bcccdc;
+            color: #333;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .sentiment {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Employee Sentiment Analysis</h1>
+    
+    <form method="POST">
+        <div class="form-group">
+            <input type="text" name="review" placeholder="Enter the review" value="{{ request.form['review'] if request.method == 'POST' else '' }}" required>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset" onclick="document.getElementById('result').innerHTML = ''; document.querySelector('input[name=review]').value = '';">
+        </div>
+    </form>
+
+    {% if sentiment %}
+    <div class="sentiment" id="result">
+        <p>Employee sentiment is: {{ sentiment }}</p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
